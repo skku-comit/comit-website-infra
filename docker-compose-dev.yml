@@ -9,7 +9,7 @@ services:
       - db-data:/var/lib/mysql
 
   api:
-    image: ghcr.io/${GITHUB_REPOSITORY_OWNER}/comit-server-api:latest
+    image: ghcr.io/${GITHUB_REPOSITORY_OWNER}/comit-api:latest
     ports:
       - "8080:8080"
     env_file:
