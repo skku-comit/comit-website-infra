@@ -3,8 +3,11 @@ services:
     image: mysql:latest
     ports:
       - "3306:3306"
-    env_file:
-      - ./mysql/.env.dev
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: dev_database
+      MYSQL_USER: dev_user
+      MYSQL_PASSWORD: dev_password
     volumes:
       - db-data:/var/lib/mysql
 
@@ -12,8 +15,6 @@ services:
     image: ghcr.io/${GITHUB_REPOSITORY_OWNER}/comit-api:latest
     ports:
       - "8080:8080"
-    env_file:
-      - ./api/.env.dev
     depends_on:
       - db
     environment:
