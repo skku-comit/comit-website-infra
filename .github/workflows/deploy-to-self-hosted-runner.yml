@@ -1,0 +1,29 @@
+name: Deploy to self-hosted runner
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: self-hosted
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Login to GHCR
+        run: docker login ghcr.io -u "${{ github.repository_owner }}" -p ${{ secrets.GHCR_TOKEN }}
+
+      - name: Pull docker images
+        run: docker compose pull
+
+      - name: Run docker compose up
+        run: docker compose up -d

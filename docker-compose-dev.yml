@@ -1,0 +1,29 @@
+services:
+  db:
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    env_file:
+      - ./mysql/.env.dev
+    volumes:
+      - db-data:/var/lib/mysql
+
+  api:
+    image: ghcr.io/${GITHUB_REPOSITORY_OWNER}/comit-server-api:latest
+    ports:
+      - "8080:8080"
+    env_file:
+      - ./api/.env.dev
+    depends_on:
+      - db
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_NAME=dev_database
+      - DB_USERNAME=dev_user
+      - DB_PASSWORD=dev_password
+      - JWT_SECRET=dev_secret
+
+volumes:
+  db-data:
