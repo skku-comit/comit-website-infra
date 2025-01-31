@@ -20,7 +20,7 @@ jobs:
           submodules: true
 
       - name: Login to GHCR
-        run: docker login ghcr.io -u "${{ github.repository_owner }}" -p ${{ secrets.GHCR_TOKEN }}
+        run: docker login ghcr.io -u "${{ github.repository_owner }}" -p ${{ secrets.GITHUB_TOKEN }}
 
       - name: Pull docker images
         run: docker compose pull
