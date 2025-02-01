@@ -23,7 +23,7 @@ jobs:
         run: docker login ghcr.io -u "${{ github.repository_owner }}" -p ${{ secrets.GITHUB_TOKEN }}
 
       - name: Pull docker images
-        run: docker compose pull
+        run: docker compose -f docker-compose-dev.yml pull
 
       - name: Run docker compose up
         run: docker compose up -d
