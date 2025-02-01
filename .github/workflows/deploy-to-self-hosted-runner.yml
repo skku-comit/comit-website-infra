@@ -24,8 +24,6 @@ jobs:
 
       - name: Pull docker images
         run: docker compose -f docker-compose-dev.yml pull
-        shell: cmd
 
       - name: Run docker compose up
         run: docker compose up -d
-        shell: cmd
