@@ -20,10 +20,16 @@ jobs:
           submodules: true
 
       - name: Login to GHCR
-        run: docker login ghcr.io -u "${{ github.repository_owner }}" -p ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u "${{ github.repository_owner }}" --password-stdin
+        shell: cmd
 
       - name: Pull docker images
-        run: docker compose -f docker-compose-dev.yml pull
+        run: |
+          docker compose -f docker-compose-dev.yml pull
+        shell: cmd
 
       - name: Run docker compose up
-        run: docker compose up -d
+        run: |
+          docker compose -f docker-compose-dev.yml up -d
+        shell: cmd
