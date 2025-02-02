@@ -14,14 +14,17 @@ jobs:
     name: Deploy
     runs-on: self-hosted
     steps:
-      - name: Login to GHCR
-        run: |
-          echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u "${{ github.repository_owner }}" --password-stdin
-        shell: cmd
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: true
 
-      - name: Check current user
-        run: whoami
-        shell: cmd
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Pull docker images
         run: |
