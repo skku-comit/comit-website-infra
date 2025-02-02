@@ -14,11 +14,6 @@ jobs:
     name: Deploy
     runs-on: self-hosted
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          submodules: true
-
       - name: Login to GHCR
         run: |
           echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u "${{ github.repository_owner }}" --password-stdin
