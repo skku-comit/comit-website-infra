@@ -9,26 +9,26 @@ services:
     volumes:
       - db-data:/var/lib/mysql
 
-  api:
-    image: ghcr.io/${GITHUB_REPOSITORY_OWNER}/comit-api:latest
-    depends_on:
-      - db
-    environment:
-      - DB_HOST=db
-      - DB_PORT=3306
-      - DB_NAME=dev_database
-      - DB_USERNAME=dev_user
-      - DB_PASSWORD=dev_password
-      - JWT_SECRET=dev_secret
+  # api:
+  #   image: ghcr.io/${GITHUB_REPOSITORY_OWNER}/comit-api:latest
+  #   depends_on:
+  #     - db
+  #   environment:
+  #     - DB_HOST=db
+  #     - DB_PORT=3306
+  #     - DB_NAME=dev_database
+  #     - DB_USERNAME=dev_user
+  #     - DB_PASSWORD=dev_password
+  #     - JWT_SECRET=dev_secret
 
-  nginx:
-    image: nginx:latest
-    ports:
-      - "8080:8080"
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-    depends_on:
-      - api
+  # nginx:
+  #   image: nginx:latest
+  #   ports:
+  #     - "8080:8080"
+  #   volumes:
+  #     - ./nginx.conf:/etc/nginx/nginx.conf
+  #   depends_on:
+  #     - api
 
 volumes:
   db-data:
