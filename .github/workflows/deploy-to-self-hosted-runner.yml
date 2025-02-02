@@ -19,6 +19,10 @@ jobs:
           echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u "${{ github.repository_owner }}" --password-stdin
         shell: cmd
 
+      - name: Check current user
+        run: whoami
+        shell: cmd
+
       - name: Pull docker images
         run: |
           docker compose -f docker-compose-dev.yml pull
