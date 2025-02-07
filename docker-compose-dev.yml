@@ -20,7 +20,7 @@ services:
       - DB_NAME=dev_database
       - DB_USERNAME=dev_user
       - DB_PASSWORD=dev_password
-      - JWT_SECRET=dev_secret
+      - JWT_SECRET=594825e3-acb5-49ea-8505-e9746e9d3647
     restart: unless-stopped
 
   nginx:
